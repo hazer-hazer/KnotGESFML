@@ -8,7 +8,7 @@ Knot Game Engine
 
 Knot is using Node Object-control system. It means that every game logic element is a Node or its child.
 For example:
-- Node (Scene)
-- -> Node2D (Player)
-- - -> Sprite
-- - -> CollisionShape2D
+> Node (Scene)
+> > Node2D (Player)
+> > > Sprite
+> > > CollisionShape2D
