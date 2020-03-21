@@ -1,14 +1,23 @@
 #include "src/nodes/Node.h"
 
+#include <iostream>
+
+
 int main(){
-    Node * c = new Node();
-	Node * a = new Node();
+	try{
+		Node * a = new Node("A");
+		Node * b = new Node("B");
 
-	c->addChild(a);
+		a->on("event", [](){
+			std::cout << "EVENT" << std::endl;
+		});
 
-	for(Node * n : c->getChildren()){
-		n->test();
+		a->trigger("event");
+
+	}catch(const char * message){
+		std::cout << message << std::endl;
 	}
+
 
     return 0;
 }
