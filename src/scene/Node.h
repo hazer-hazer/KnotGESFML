@@ -1,9 +1,9 @@
+#ifndef NODE_H
+#define NODE_H
+
 #include <vector>
 #include <map>
 #include <iterator>
-
-#ifndef NODE_H
-#define NODE_H
 
 #include "core/EventHandler.h"
 #include "core/Nameable.h"
@@ -12,8 +12,8 @@
 
 class Node;
 
-typedef std::map <StringName, Node *> NodeChildren;
-typedef std::vector <Node *> NodeChildrenArray;
+typedef std::vector <Node *> NodeChildren;
+typedef std::map <StringName, Node *> NodeChildrenMap;
 
 class Node : public Nameable,
 			 public EventHandler {
@@ -28,7 +28,7 @@ class Node : public Nameable,
         Node * findChild(std::string path);
         Node * findChild();
         NodeChildren getChildren();
-        NodeChildrenArray getChildrenArray();
+        NodeChildrenMap getChildrenMap();
         Node * getParent();
 
     protected:

@@ -4,29 +4,20 @@
 #include <iostream>
 
 #include "scene/2d/Line2D.h"
+#include "canvas/Canvas2D.h"
+#include "core/Color.h"
 
 int main(){
+	Canvas2D canvas({ 1080, 720 }, "TITLE");
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+	Color color(0x000000);
 
-    window.clear(sf::Color::White);
+	Line2D * line = new Line2D(Point2(0, 0), Point2(100, 100));
 
-    Line2D * line = new Line2D(Point2(0, 0), Point2(100, 100));
-
-    line->draw(window);
-
-    window.display();
-
-    // run the program as long as the window is open
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-    }
+	while(canvas.isOpen()){
+		canvas.clear(color.toSfColor());
+		canvas.handleEvents();
+		line->draw(canvas);
+		canvas.display();
+	}
 }

@@ -1,13 +1,28 @@
-#ifndef CANVAS2D_H
-#define CANVAS2D_H
+#ifndef SFCANVAS2D_H
+#define SFCANVAS2D_H
 
-#include "canvas/Canvas.h"
+#define DEFAULT_FPS 60
 
-class Canvas2D : public Canvas {
+#include "core/math/Point2.h"
+#include <SFML/Graphics.hpp>
+
+class Canvas2D {
     public:
-        Canvas2D(){};
+        Canvas2D(sf::VideoMode size, sf::String title);
         ~Canvas2D(){};
 
+        const sf::RenderWindow & getWindow() const;
+
+        void clear(sf::Color color);
+        void display();
+        bool isOpen();
+
+        void handleEvents();
+
+        void drawLine(Point2 from, Point2 to);
+
+    protected:
+        sf::RenderWindow window;
 };
 
 #endif

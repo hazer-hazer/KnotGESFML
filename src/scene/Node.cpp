@@ -14,23 +14,24 @@ void Node::addChild(Node * child){
 		throw NODE_ADD_CHILD_THIS_EXCEPTION;
 	}
     child->parent = this;
-    children.insert(std::pair <StringName, Node *> (child->getName(), child));
+	children.push_back(child);
 }
 
-Node * Node::findChild(){
-	return this;
-}
+// Node * Node::findChild(){
+// 	return this;
+// }
 
-Node * Node::findChild(std::string path){
-	if(path.size() == 0 || path == "/"){
-		return findChild();
-	}
-	std::string child = path.substr(0, path.find('/'));
-	if(children[child]){
-		throw "Node " + child + " was not found in Node " + name;
-	}
-	return children[child]->findChild( path.substr(path.find('/') + 1, path.size() - 1) );
-}
+// REMAKE
+// Node * Node::findChild(std::string path){
+// 	if(path.size() == 0 || path == "/"){
+// 		return findChild();
+// 	}
+// 	std::string child = path.substr(0, path.find('/'));
+// 	if(children[child]){
+// 		throw "Node " + child + " was not found in Node " + name;
+// 	}
+// 	return children[child]->findChild( path.substr(path.find('/') + 1, path.size() - 1) );
+// }
 
 // Get Children as map <string, Node *>
 NodeChildren Node::getChildren(){
@@ -38,11 +39,10 @@ NodeChildren Node::getChildren(){
 }
 
 // Get Children as vector
-NodeChildrenArray Node::getChildrenArray(){
-    NodeChildrenArray chidlrenArray;
-    NodeChildren::iterator iterator;
-    for(iterator = children.begin(); iterator != children.end(); iterator++){
-        chidlrenArray.push_back(iterator->second);
-    }
-    return chidlrenArray;
+NodeChildrenMap Node::getChildrenMap(){
+    NodeChildrenMap map;
+	for(auto child : children){
+		map.insert({ child->getName(), child });
+	}
+	return map;
 }

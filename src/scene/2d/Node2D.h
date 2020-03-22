@@ -4,7 +4,7 @@
 #include "scene/Node.h"
 #include "core/math/Point2.h"
 
-class Node2D : Node {
+class Node2D : public Node {
 
 	public:
 
