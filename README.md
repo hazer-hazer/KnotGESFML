@@ -12,3 +12,7 @@ For example:
 > > Node2D (Player)
 > > > Sprite
 > > > CollisionShape2D
+
+
+## Future notes
+- Using emscripten for converting engine code to WebAsm

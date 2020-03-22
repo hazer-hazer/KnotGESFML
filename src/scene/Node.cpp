@@ -8,8 +8,6 @@ Node::Node(StringName name){
 	setName(name);
 }
 
-Node::~Node(){}
-
 // Insert a child as a pair of its name and object
 void Node::addChild(Node * child){
 	if(this == child){
@@ -17,6 +15,21 @@ void Node::addChild(Node * child){
 	}
     child->parent = this;
     children.insert(std::pair <StringName, Node *> (child->getName(), child));
+}
+
+Node * Node::findChild(){
+	return this;
+}
+
+Node * Node::findChild(std::string path){
+	if(path.size() == 0 || path == "/"){
+		return findChild();
+	}
+	std::string child = path.substr(0, path.find('/'));
+	if(children[child]){
+		throw "Node " + child + " was not found in Node " + name;
+	}
+	return children[child]->findChild( path.substr(path.find('/') + 1, path.size() - 1) );
 }
 
 // Get Children as map <string, Node *>

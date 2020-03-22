@@ -1,4 +1,4 @@
-#include "EventHandler.h"
+#include "core/EventHandler.h"
 
 EventHandler::EventHandler(){}
 EventHandler::~EventHandler(){}
