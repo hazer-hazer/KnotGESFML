@@ -1,1 +1,1 @@
-g++ src/**/*.cpp src/**/**/*.cpp main.cpp -o bin/knot -I ./deps/sfml/include -I ./deps/sfml/bin -L ./deps/sfml/lib -lsfml-graphics -lsfml-window -lsfml-system -Wall
+g++ main.cpp src/**/*.cpp src/**/**/*.cpp -o bin/knot -I ./deps/sfml/include -I ./deps/sfml/bin -L ./deps/sfml/lib -lsfml-graphics -lsfml-window -lsfml-system -Wall

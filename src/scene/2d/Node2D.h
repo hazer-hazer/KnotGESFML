@@ -10,6 +10,8 @@ class Node2D : public Node {
 
 		Node2D();
 
+        virtual ~Node2D() = default;
+
 		void setPosition(Point2 p);
 		Point2 getPosition();
 

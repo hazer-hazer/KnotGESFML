@@ -2,6 +2,7 @@
 #define POINT2_H
 
 #include <cmath>
+#include <string>
 
 struct Point2 {
 	double x = 0;
@@ -12,6 +13,10 @@ struct Point2 {
 
 	double distanceTo(Point2 p);
 	void move(Point2 p);
+
+	std::string toString(){
+		return std::to_string(x) + ":" + std::to_string(y);
+	};
 };
 
 #endif // POINT2_H

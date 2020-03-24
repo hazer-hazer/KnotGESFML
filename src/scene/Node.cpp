@@ -1,13 +1,5 @@
 #include "Node.h"
 
-Node::Node(){
-	setName();
-}
-
-Node::Node(StringName name){
-	setName(name);
-}
-
 // Insert a child as a pair of its name and object
 void Node::addChild(Node * child){
 	if(this == child){

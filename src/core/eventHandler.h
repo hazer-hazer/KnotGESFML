@@ -1,20 +1,25 @@
-#include <string>
-#include <map>
-
 #ifndef EVENTHANDLER_H
 #define EVENTHANDLER_H
 
-typedef void (*EventMethod)(void);
+#include <string>
+#include <map>
+#include <vector>
+#include <functional>
 
-typedef std::map <std::string, EventMethod> EventStack;
+#include "core/Object.h"
 
-class EventHandler{
+typedef std::function<void()> EventMethod;
+
+typedef std::map <std::string, std::vector <EventMethod>> EventStack;
+
+class EventHandler : public Object {
 	public:
 		EventHandler();
 		virtual ~EventHandler();
 
 		void on(std::string name, EventMethod method);
-		void trigger(std::string name);
+		void emit(std::string name);
+		void remove(std::string name);
 
 	private:
 		EventStack events;

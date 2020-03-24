@@ -5,23 +5,23 @@
 #include <map>
 #include <iterator>
 
-#include "core/EventHandler.h"
-#include "core/Nameable.h"
+#include "core/Object.h"
 
 #define NODE_ADD_CHILD_THIS_EXCEPTION "Tried to add node object itself as a child"
 
 class Node;
 
 typedef std::vector <Node *> NodeChildren;
-typedef std::map <StringName, Node *> NodeChildrenMap;
+typedef std::map <std::string, Node *> NodeChildrenMap;
 
-class Node : public Nameable,
-			 public EventHandler {
+class Node : public Object {
 
     public:
 
-        Node();
-        Node(StringName);
+        Node() : Object(){};
+        Node(std::string name) : Object(name){};
+
+        virtual ~Node() = default;
 
         // Children
         void addChild(Node * child);

@@ -1,12 +1,20 @@
 #include "canvas/Canvas2D.h"
 
-Canvas2D::Canvas2D(sf::VideoMode size, sf::String title) : window(size, title) {
+Canvas2D::Canvas2D(sf::VideoMode size, sf::String title, uint32_t style) : window(size, title, style) {
 	window.setPosition({ window.getPosition().x, 0 });
 	window.setFramerateLimit(DEFAULT_FPS);
+
+	window.setActive();
+
+	setClearColor(Color::BLACK);
 }
 
-void Canvas2D::clear(sf::Color color){
-	window.clear(color);
+void Canvas2D::clear(){
+	window.clear(clearColor.toSfColor());
+}
+
+void Canvas2D::setClearColor(Color clearColor){
+	this->clearColor = clearColor;
 }
 
 void Canvas2D::display(){
@@ -17,24 +25,25 @@ bool Canvas2D::isOpen(){
 	return window.isOpen();
 }
 
-void Canvas2D::handleEvents(){
-	sf::Event event;
-	while (window.pollEvent(event)){
-		if (event.type == sf::Event::Closed)
-			window.close();
-	}
-}
-
-const sf::RenderWindow & Canvas2D::getWindow() const {
+sf::RenderWindow & Canvas2D::getWindow() {
 	return window;
 }
 
-void Canvas2D::drawLine(Point2 from, Point2 to){
-	sf::Vertex line[2];
-	line[0].position = sf::Vector2f(from.x, from.y);
-	line[0].color = sf::Color::Black;
-	line[1].position = sf::Vector2f(to.x, to.y);
-	line[1].color = sf::Color::Black;
+void Canvas2D::draw(const sf::Drawable & drawable){
+	window.draw(drawable);
+}
 
-	window.draw(line, 1, sf::Quads);
+void Canvas2D::drawPolygon(std::vector <Point2> points, Color color){
+	int count = points.size();
+	sf::Vertex poly[count];
+	for(int i = 0; i < count; i++){
+		poly[i].position = sf::Vector2f(points[i].x, points[i].y);
+		poly[i].color = color.toSfColor();
+	}
+
+	window.draw(poly, count, sf::Quads);
+}
+
+void Canvas2D::drawSprite(sf::Sprite &sprite){
+	window.draw(sprite);
 }

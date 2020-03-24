@@ -9,7 +9,8 @@
 class Drawable2D : public Node2D {
     public:
         Drawable2D(){};
-        ~Drawable2D(){};
+
+        virtual ~Drawable2D() = default;
 
         void drawChildren(Canvas2D &canvas);
         

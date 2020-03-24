@@ -4,25 +4,35 @@
 #define DEFAULT_FPS 60
 
 #include "core/math/Point2.h"
+#include "core/Color.h"
 #include <SFML/Graphics.hpp>
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 class Canvas2D {
     public:
-        Canvas2D(sf::VideoMode size, sf::String title);
+        Canvas2D(sf::VideoMode size, sf::String title, uint32_t style = sf::Style::Default);
         ~Canvas2D(){};
 
-        const sf::RenderWindow & getWindow() const;
+        sf::RenderWindow & getWindow();
 
-        void clear(sf::Color color);
+        void clear();
         void display();
         bool isOpen();
 
-        void handleEvents();
+        void setClearColor(Color clearColor);
 
-        void drawLine(Point2 from, Point2 to);
+        void draw(const sf::Drawable & drawable);
+        void drawPolygon(std::vector <Point2> points, Color color = Color::BLACK);
+        void drawSprite(sf::Sprite &sprite);
 
     protected:
         sf::RenderWindow window;
+        
+        Color clearColor;
 };
 
 #endif
