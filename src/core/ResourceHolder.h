@@ -9,6 +9,7 @@ class ResourceHolder : public Object {
 	public:
 
 		static ResourceManager <sf::Texture> textures;
+		static ResourceManager <sf::Font> fonts;
 };
 
 #endif

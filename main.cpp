@@ -3,11 +3,14 @@
 
 #include <iostream>
 
-#include "scene/2d/Polygon.h"
 #include "canvas/Canvas2D.h"
 #include "core/Color.h"
 #include "core/Input.h"
+#include "core/ResourceHolder.h"
+
+#include "scene/2d/Polygon.h"
 #include "scene/2d/Sprite.h"
+#include "scene/2d/Label.h"
 
 int main(){
 
@@ -47,8 +50,11 @@ int main(){
 		// 	y = 0;
 		// });
 
+		Label * label = new Label("FPS", ResourceHolder::fonts.load("roboto"), 32);
+		label->setColor(Color::RED);
+
 		input.on("mouseMoved", [&sprite, &input](){
-			sprite->setPosition(input.getMousePosition(false));
+			sprite->setPosition(input.getMousePosition());
 		});
 
 		while(canvas.isOpen()){
@@ -57,6 +63,9 @@ int main(){
 			input.pollEvents();
 
 			sprite->draw(canvas);
+			
+			label->draw(canvas);
+
 			canvas.display();
 		}
 	}catch(const char * message){

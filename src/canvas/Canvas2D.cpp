@@ -43,7 +43,3 @@ void Canvas2D::drawPolygon(std::vector <Point2> points, Color color){
 
 	window.draw(poly, count, sf::Quads);
 }
-
-void Canvas2D::drawSprite(sf::Sprite &sprite){
-	window.draw(sprite);
-}

@@ -39,6 +39,7 @@ class ResourceManager : public Object {
 				// fail.loadFromFile(m_folder + "_fail_" + m_extention);
 				// m_resources.insert(std::make_pair(name, fail));
 			}else {
+				print(path + " loaded");
 				resources.insert(std::make_pair(name, res));
 			}
 		}

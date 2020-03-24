@@ -16,5 +16,5 @@ void Sprite::setTexture(sf::Texture * texture){
 
 void Sprite::draw(Canvas2D &canvas){
 	sprite.setPosition(position.x, position.y);
-	canvas.drawSprite(sprite);
+	canvas.draw(sprite);
 }

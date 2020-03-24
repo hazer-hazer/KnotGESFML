@@ -27,7 +27,6 @@ class Canvas2D {
 
         void draw(const sf::Drawable & drawable);
         void drawPolygon(std::vector <Point2> points, Color color = Color::BLACK);
-        void drawSprite(sf::Sprite &sprite);
 
     protected:
         sf::RenderWindow window;
