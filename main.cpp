@@ -19,40 +19,42 @@ int main(){
 
 		Input input(canvas.getWindow());
 
-		int x = 0, y = 0;
+		// int x = 0, y = 0;
 
-		input.on("keyPressedA", [&sprite, &x](){
-			x = -1;
-		});
-		input.on("keyPressedD", [&sprite, &x](){
-			x = 1;
-		});
-		input.on("keyPressedW", [&sprite, &y](){
-			y = -1;
-		});
-		input.on("keyPressedS", [&sprite, &y](){
-			y = 1;
-		});
+		// input.on("keyPressedA", [&sprite, &x](){
+		// 	x = -1;
+		// });
+		// input.on("keyPressedD", [&sprite, &x](){
+		// 	x = 1;
+		// });
+		// input.on("keyPressedW", [&sprite, &y](){
+		// 	y = -1;
+		// });
+		// input.on("keyPressedS", [&sprite, &y](){
+		// 	y = 1;
+		// });
 
-		input.on("keyReleasedA", [&sprite, &x](){
-			x = 0;
-		});
-		input.on("keyReleasedD", [&sprite, &x](){
-			x = 0;
-		});
-		input.on("keyReleasedW", [&sprite, &y](){
-			y = 0;
-		});
-		input.on("keyReleasedS", [&sprite, &y](){
-			y = 0;
+		// input.on("keyReleasedA", [&sprite, &x](){
+		// 	x = 0;
+		// });
+		// input.on("keyReleasedD", [&sprite, &x](){
+		// 	x = 0;
+		// });
+		// input.on("keyReleasedW", [&sprite, &y](){
+		// 	y = 0;
+		// });
+		// input.on("keyReleasedS", [&sprite, &y](){
+		// 	y = 0;
+		// });
+
+		input.on("mouseMoved", [&sprite, &input](){
+			sprite->setPosition(input.getMousePosition(false));
 		});
 
 		while(canvas.isOpen()){
 			canvas.clear();
 
 			input.pollEvents();
-
-			sprite->move(Point2(x, y));
 
 			sprite->draw(canvas);
 			canvas.display();

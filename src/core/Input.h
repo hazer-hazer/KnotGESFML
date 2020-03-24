@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 
+#include "core/math/Point2.h"
 #include "core/EventHandler.h"
 
 class Input : public EventHandler {
@@ -16,6 +17,7 @@ class Input : public EventHandler {
 
 		static const char * keyNames[];
 
+		Point2 getMousePosition(bool relative = true);
 		bool isKeyPressed();
 
 		void pollEvents();
@@ -25,6 +27,7 @@ class Input : public EventHandler {
 
 		void pollKeyPressed();
 		void pollKeyReleased();
+		void pollMouseMove();
 };
 
 #endif

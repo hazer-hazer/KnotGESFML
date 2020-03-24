@@ -5,13 +5,13 @@
 #include <string>
 
 struct Point2 {
-	double x = 0;
-	double y = 0;
+	float x = 0;
+	float y = 0;
 
 	Point2() : x(0), y(0) {};
-	Point2(double nx, double ny) : x(nx), y(ny) {};
+	Point2(float nx, float ny) : x(nx), y(ny) {};
 
-	double distanceTo(Point2 p);
+	float distanceTo(Point2 p);
 	void move(Point2 p);
 
 	std::string toString(){

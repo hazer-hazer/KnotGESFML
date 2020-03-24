@@ -1,5 +1,11 @@
 #include "core/Input.h"
 
+Input::Input(sf::RenderWindow &win) : window(win){
+}
+
+
+// Keyboard
+
 const char * Input::keyNames[] = {
 	"A", "B", "C", "D",
 	"E", "F", "G", "H",
@@ -29,9 +35,6 @@ const char * Input::keyNames[] = {
 	"F15"
 };
 
-Input::Input(sf::RenderWindow &win) : window(win){
-}
-
 void Input::pollEvents(){
 	while(window.pollEvent(event)){
 		switch(event.type){
@@ -43,6 +46,9 @@ void Input::pollEvents(){
 				break;
 			case sf::Event::KeyReleased:
 				pollKeyReleased();
+				break;
+			case sf::Event::MouseMoved:
+				pollMouseMove();
 				break;
 			default:
 				break;
@@ -64,4 +70,20 @@ void Input::pollKeyReleased(){
 	if(eventExists(eventName)){
 		emit(eventName);
 	}
+}
+
+// Mouse
+
+void Input::pollMouseMove(){
+	emit("mouseMoved");
+}
+
+Point2 Input::getMousePosition(bool relative){
+	sf::Vector2i pos;
+	if(relative){
+		pos = sf::Mouse::getPosition(window);
+	}else{
+		pos = sf::Mouse::getPosition();
+	}
+	return Point2(pos.x, pos.y);
 }

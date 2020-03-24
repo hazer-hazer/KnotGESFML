@@ -9,6 +9,10 @@ void Node2D::setPosition(Point2 p){
     this->position = p;
 }
 
+void Node2D::setPosition(sf::Vector2f p){
+    this->position = Point2(p.x, p.y);
+}
+
 Point2 Node2D::getPosition(){
     return position;
 }
