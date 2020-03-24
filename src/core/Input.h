@@ -12,9 +12,6 @@ class Input : public EventHandler {
 		Input(sf::RenderWindow &window);
 		virtual ~Input(){};
 
-		sf::Event event;
-		sf::RenderWindow &window;
-
 		static const char * keyNames[];
 
 		Point2 getMousePosition(bool relative = true);
@@ -23,6 +20,9 @@ class Input : public EventHandler {
 		void pollEvents();
 
 	private:
+		sf::Event event;
+		sf::RenderWindow &window;
+
 		std::unordered_map <sf::Keyboard::Key, char*> keys;
 
 		void pollKeyPressed();

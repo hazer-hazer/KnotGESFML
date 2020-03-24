@@ -11,64 +11,33 @@
 #include "scene/2d/Polygon.h"
 #include "scene/2d/Sprite.h"
 #include "scene/2d/Label.h"
+#include "core/Engine.h"
 
 int main(){
-
 	try{
-
-		Canvas2D canvas({ 1300, 750 }, "TITLE");
+		Engine engine;
 
 		Sprite * sprite = new Sprite("image");
 
-		Input input(canvas.getWindow());
-
-		// int x = 0, y = 0;
-
-		// input.on("keyPressedA", [&sprite, &x](){
-		// 	x = -1;
-		// });
-		// input.on("keyPressedD", [&sprite, &x](){
-		// 	x = 1;
-		// });
-		// input.on("keyPressedW", [&sprite, &y](){
-		// 	y = -1;
-		// });
-		// input.on("keyPressedS", [&sprite, &y](){
-		// 	y = 1;
-		// });
-
-		// input.on("keyReleasedA", [&sprite, &x](){
-		// 	x = 0;
-		// });
-		// input.on("keyReleasedD", [&sprite, &x](){
-		// 	x = 0;
-		// });
-		// input.on("keyReleasedW", [&sprite, &y](){
-		// 	y = 0;
-		// });
-		// input.on("keyReleasedS", [&sprite, &y](){
-		// 	y = 0;
-		// });
+		Node * scene = new Node();
 
 		Label * label = new Label("FPS", ResourceHolder::fonts.load("roboto"), 32);
-		label->setColor(Color::RED);
+		label->setColor(Color::WHITE);
+
+		scene->addChild(sprite);
+		scene->addChild(label);
+
+		engine.addScene(scene);
+
+		Input & input = engine.getInput();
 
 		input.on("mouseMoved", [&sprite, &input](){
 			sprite->setPosition(input.getMousePosition());
 		});
 
-		while(canvas.isOpen()){
-			canvas.clear();
+		engine.launch();
 
-			input.pollEvents();
-
-			sprite->draw(canvas);
-			
-			label->draw(canvas);
-
-			canvas.display();
-		}
 	}catch(const char * message){
-		std::cout << message << std::endl;
+		std::cerr << message << std::endl;
 	}
 }

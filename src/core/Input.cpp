@@ -3,7 +3,6 @@
 Input::Input(sf::RenderWindow &win) : window(win){
 }
 
-
 // Keyboard
 
 const char * Input::keyNames[] = {
@@ -75,7 +74,9 @@ void Input::pollKeyReleased(){
 // Mouse
 
 void Input::pollMouseMove(){
-	emit("mouseMoved");
+	if(eventExists("mouseMoved")){
+		emit("mouseMoved");
+	}
 }
 
 Point2 Input::getMousePosition(bool relative){

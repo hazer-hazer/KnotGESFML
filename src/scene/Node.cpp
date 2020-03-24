@@ -30,6 +30,12 @@ NodeChildren Node::getChildren(){
 	return children;
 }
 
+void Node::eachChild(std::function<void(Node *)> forEach){
+	for(auto n : children){
+		forEach(n);
+	}
+}
+
 // Get Children as vector
 NodeChildrenMap Node::getChildrenMap(){
     NodeChildrenMap map;

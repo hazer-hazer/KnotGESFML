@@ -12,7 +12,7 @@ class Drawable2D : public Node2D {
 
         virtual ~Drawable2D() = default;
 
-        void drawChildren(Canvas2D &canvas);
+        // void drawTree(Canvas2D &canvas);
         
         virtual void draw(Canvas2D &canvas) = 0;
 };

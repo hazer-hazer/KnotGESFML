@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <iterator>
+#include <functional>
 
 #include "core/Object.h"
 
@@ -30,6 +31,7 @@ class Node : public Object {
         NodeChildren getChildren();
         NodeChildrenMap getChildrenMap();
         Node * getParent();
+        void eachChild(std::function<void(Node *)> forEach);
 
     protected:
 

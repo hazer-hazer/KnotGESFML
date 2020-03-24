@@ -2,7 +2,6 @@
 #include <iostream>
 
 Node2D::Node2D() : Node() {
-    std::cout << "NODE2D" << std::endl;
 }
 
 void Node2D::setPosition(Point2 p){

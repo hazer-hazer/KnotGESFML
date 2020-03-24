@@ -1,7 +1,7 @@
 #include "canvas/Canvas2D.h"
 
 Canvas2D::Canvas2D(sf::VideoMode size, sf::String title, uint32_t style) : window(size, title, style) {
-	window.setPosition({ window.getPosition().x, 0 });
+	window.setPosition({ window.getPosition().x, window.getPosition().y });
 	window.setFramerateLimit(DEFAULT_FPS);
 
 	window.setActive();

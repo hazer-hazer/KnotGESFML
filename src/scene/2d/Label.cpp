@@ -21,6 +21,7 @@ void Label::setColor(Color c){
 }
 
 void Label::draw(Canvas2D &canvas){
+	print("Draw label " + text.getString());
 	text.setPosition(position.x, position.y);
 	canvas.draw(text);
 }
