@@ -52,10 +52,16 @@ void Input::pollEvents(){
 
 void Input::pollKeyPressed(){
 	int keyEq = (int) event.key.code;
-	emit(std::string("keyPressed") + keyNames[keyEq]);
+	std::string eventName = std::string("keyPressed") + keyNames[keyEq];
+	if(eventExists(eventName)){
+		emit(eventName);
+	}
 }
 
 void Input::pollKeyReleased(){
 	int keyEq = (int) event.key.code;
-	emit(std::string("keyReleased") + keyNames[keyEq]);
+	std::string eventName = std::string("keyReleased") + keyNames[keyEq];
+	if(eventExists(eventName)){
+		emit(eventName);
+	}
 }

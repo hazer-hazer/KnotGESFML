@@ -19,7 +19,8 @@ class EventHandler : public Object {
 
 		void on(std::string name, EventMethod method);
 		void emit(std::string name);
-		void remove(std::string name);
+		void clearEvents(std::string name);
+		bool eventExists(std::string name);
 
 	private:
 		EventStack events;

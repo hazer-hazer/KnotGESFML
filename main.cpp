@@ -11,48 +11,53 @@
 
 int main(){
 
-	Canvas2D canvas({ 1300, 750 }, "TITLE");
+	try{
 
-	Sprite * sprite = new Sprite("image");
+		Canvas2D canvas({ 1300, 750 }, "TITLE");
 
-	Input input(canvas.getWindow());
+		Sprite * sprite = new Sprite("image");
 
-	int x = 0, y = 0;
+		Input input(canvas.getWindow());
 
-	input.on("keyPressedA", [&sprite, &x](){
-		x = -1;
-	});
-	input.on("keyPressedD", [&sprite, &x](){
-		x = 1;
-	});
-	input.on("keyPressedW", [&sprite, &y](){
-		y = -1;
-	});
-	input.on("keyPressedS", [&sprite, &y](){
-		y = 1;
-	});
+		int x = 0, y = 0;
 
-	input.on("keyReleasedA", [&sprite, &x](){
-		x = 0;
-	});
-	input.on("keyReleasedD", [&sprite, &x](){
-		x = 0;
-	});
-	input.on("keyReleasedW", [&sprite, &y](){
-		y = 0;
-	});
-	input.on("keyReleasedS", [&sprite, &y](){
-		y = 0;
-	});
+		input.on("keyPressedA", [&sprite, &x](){
+			x = -1;
+		});
+		input.on("keyPressedD", [&sprite, &x](){
+			x = 1;
+		});
+		input.on("keyPressedW", [&sprite, &y](){
+			y = -1;
+		});
+		input.on("keyPressedS", [&sprite, &y](){
+			y = 1;
+		});
 
-	while(canvas.isOpen()){
-		canvas.clear();
+		input.on("keyReleasedA", [&sprite, &x](){
+			x = 0;
+		});
+		input.on("keyReleasedD", [&sprite, &x](){
+			x = 0;
+		});
+		input.on("keyReleasedW", [&sprite, &y](){
+			y = 0;
+		});
+		input.on("keyReleasedS", [&sprite, &y](){
+			y = 0;
+		});
 
-		input.pollEvents();
+		while(canvas.isOpen()){
+			canvas.clear();
 
-		sprite->move(Point2(x, y));
+			input.pollEvents();
 
-		sprite->draw(canvas);
-		canvas.display();
+			sprite->move(Point2(x, y));
+
+			sprite->draw(canvas);
+			canvas.display();
+		}
+	}catch(const char * message){
+		std::cout << message << std::endl;
 	}
 }
