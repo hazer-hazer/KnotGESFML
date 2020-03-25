@@ -6,8 +6,14 @@
 
 class Sprite : public Drawable2D {
 	public:
-		Sprite(std::string name);
+		// Constructor with path to texture file
+		Sprite(std::string path);
+
+		// Constructor with existent texture as parameter
 		Sprite(sf::Texture * texture);
+
+		// Constructor with texture loaded with ResourceHolder
+		Sprite(sf::Texture & texture);
 
         virtual ~Sprite() = default;
 

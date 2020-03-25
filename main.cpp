@@ -13,16 +13,23 @@
 #include "scene/2d/Label.h"
 #include "core/Engine.h"
 
+using std::cout;
+using std::endl;
+
 int main(){
 	try{
 		Engine engine;
 
-		Sprite * sprite = new Sprite("image");
+		Sprite * sprite = new Sprite(ResourceHolder::textures.load("image"));
 
 		Node * scene = new Node();
 
 		Label * label = new Label("FPS", ResourceHolder::fonts.load("roboto"), 32);
-		label->setColor(Color::WHITE);
+		label->setColor(Color::CYAN);
+
+		label->_process([&label, &engine](float delta){
+			label->setString((int)engine.getFps());
+		});
 
 		scene->addChild(sprite);
 		scene->addChild(label);
@@ -33,6 +40,10 @@ int main(){
 
 		input.on("mouseMoved", [&sprite, &input](){
 			sprite->setPosition(input.getMousePosition());
+		});
+
+		sprite->_process([&sprite](float delta){
+			sprite->move(Point2(delta * 100, delta * 100));
 		});
 
 		engine.launch();

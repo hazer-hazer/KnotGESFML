@@ -4,6 +4,14 @@ void Label::setString(std::string str){
 	text.setString(str);
 }
 
+void Label::setString(int num){
+	text.setString(std::to_string(num));
+}
+
+void Label::setString(float num){
+	text.setString(std::to_string(num));
+}
+
 void Label::setFont(sf::Font &font){
 	text.setFont(font);
 }
@@ -21,7 +29,6 @@ void Label::setColor(Color c){
 }
 
 void Label::draw(Canvas2D &canvas){
-	print("Draw label " + text.getString());
 	text.setPosition(position.x, position.y);
 	canvas.draw(text);
 }

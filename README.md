@@ -29,3 +29,23 @@ Input automatically emits all events that have any functions in its stack.
 
 ## Future notes
 - Using emscripten for converting engine code to WebAsm
+
+
+## Dev Notes
+
+[Engine cycle]
+* Input
+* Game Logic
+* Camera updating
+* Objects updating (movement, states and etc.)
+* GUI updating
+* Audio
+* Rendering
+
+## Helpful links
+
+Engine structure:
+- https://www.gamasutra.com/blogs/MichaelKissner/20151027/257369/Writing_a_Game_Engine_from_Scratch__Part_1_Messaging.php
+
+Particle system:
+- https://github.com/SFML/SFML/wiki/Source:-Particle-System-for-SFML-2

@@ -6,6 +6,8 @@
 #include <iterator>
 #include <functional>
 
+#include <SFML/Graphics.hpp>
+
 #include "core/Object.h"
 
 #define NODE_ADD_CHILD_THIS_EXCEPTION "Tried to add node object itself as a child"
@@ -24,6 +26,10 @@ class Node : public Object {
 
         virtual ~Node() = default;
 
+        void update();
+
+        void _process(std::function <void(float delta)> process);
+
         // Children
         void addChild(Node * child);
         Node * findChild(std::string path);
@@ -31,9 +37,12 @@ class Node : public Object {
         NodeChildren getChildren();
         NodeChildrenMap getChildrenMap();
         Node * getParent();
-        void eachChild(std::function<void(Node *)> forEach);
+        void eachChild(std::function <void(Node *)> forEach);
 
     protected:
+        sf::Clock processTimer;
+
+        std::function <void(float delta)> process;
 
         // Children
         NodeChildren children;

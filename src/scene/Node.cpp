@@ -25,6 +25,16 @@ void Node::addChild(Node * child){
 // 	return children[child]->findChild( path.substr(path.find('/') + 1, path.size() - 1) );
 // }
 
+void Node::update(){
+	if(process != nullptr){
+		process(processTimer.restart().asSeconds());
+	}
+}
+
+void Node::_process(std::function <void(float delta)> process){
+	this->process = process;
+}
+
 // Get Children as map <string, Node *>
 NodeChildren Node::getChildren(){
 	return children;

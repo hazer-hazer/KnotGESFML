@@ -1,8 +1,12 @@
 #include "scene/2d/Sprite.h"
 
-Sprite::Sprite(std::string name){
-	sf::Texture * texture = new sf::Texture(ResourceHolder::textures.load(name));
+Sprite::Sprite(std::string path){
+	sf::Texture * texture = new sf::Texture(ResourceHolder::textures.load(path));
 	setTexture(texture);
+}
+
+Sprite::Sprite(sf::Texture & texture){
+	setTexture(&texture);
 }
 
 Sprite::Sprite(sf::Texture * texture){
