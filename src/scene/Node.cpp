@@ -7,7 +7,7 @@ void Node::onready(){}
 void Node::onprocess(float delta){}
 
 // Ready
-void Node::set_ready(ReadyFunction &ready_func){
+void Node::set_ready(ReadyFunction ready_func){
 	_ready = ready_func;
 }
 
@@ -19,7 +19,7 @@ void Node::ready(){
 }
 
 // Process
-void Node::set_process(ProcessFunction &process_func){
+void Node::set_process(ProcessFunction process_func){
 	_process = process_func;
 }
 

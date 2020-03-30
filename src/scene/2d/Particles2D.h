@@ -53,7 +53,7 @@ class Particles2D : public Drawable2D {
 
 	// Speed
 	public:
-		void set_speed(float gravity);
+		void set_speed(float speed);
 		float get_speed();
 
 	private:
@@ -88,22 +88,38 @@ class Particles2D : public Drawable2D {
 	private:
 		bool fadeout = true;
 
+	// Texture
+	public:
+		void set_texture(sf::Texture & texture);
+		sf::Texture & get_texture();
+
+	private:
+		sf::Texture texture;
+
+	// Size
+	public:
+		void set_size(int size);
+		int get_size();
+
+	private:
+		int size;
+
 	// Particles
 	private:
 		struct Particle : public sf::Drawable, public sf::Transformable {
 			float lifetime;
 			sf::Vector2f velocity;
-			sf::Sprite sprite;
+			sf::RectangleShape shape;
 
 			void draw(sf::RenderTarget &target, sf::RenderStates states) const {
 				states.transform *= getTransform();
-				target.draw(sprite, states);
+				target.draw(shape, states);
 			}
 		};
 
 		std::vector <Particle> particles;
 
-		void reset_particle(std::size_t);
+		void reset_particle(Particle &p);
 };
 
 #endif

@@ -37,7 +37,7 @@ class Node : public Object {
 	// Ready
 	public:
 		virtual void onready();
-		void set_ready(ReadyFunction &ready);
+		void set_ready(ReadyFunction ready);
 		void ready();
 
 	private:
@@ -46,7 +46,7 @@ class Node : public Object {
 	// Process
 	public:
 		virtual void onprocess(float delta);
-		void set_process(ProcessFunction &process);
+		void set_process(ProcessFunction process);
 		void process();
 
 	private:

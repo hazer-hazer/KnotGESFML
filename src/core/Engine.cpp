@@ -61,7 +61,7 @@ void Engine::launch(){
 		// * Rendering
 		Canvas2D::get()->clear();
 		
-		print(std::to_string(get_fps()) + " fps");		
+		// print(std::to_string(get_fps()) + " fps");		
 
 		scene.through_tree<Drawable2D>([this](Drawable2D * node){
 			Canvas2D::get()->draw(*node);

@@ -5,22 +5,19 @@ Particles2D::Particles2D(){}
 void Particles2D::onready(){
 	particles.clear();
 	particles.resize(amount);
-	sf::Texture noneTexture;
-	noneTexture.create(5, 5);
-	for(std::size_t i = 0; i < amount; i++){
-		particles[i].sprite.setTexture(noneTexture);
-		reset_particle(i);
+	for(Particle &p : particles){
+		p.shape.setSize(sf::Vector2f(size, size));
+		p.shape.setTexture(&texture);
+		reset_particle(p);
 	}
 }
 
 void Particles2D::onprocess(float delta){
-	for(std::size_t i = 0; i < amount; i++){
-		Particle &p = particles[i];
-
+	for(Particle &p : particles){
 		p.lifetime -= delta;
 
 		if(p.lifetime <= 0.f){
-			reset_particle(i);
+			reset_particle(p);
 			continue;
 		}
 
@@ -29,9 +26,9 @@ void Particles2D::onprocess(float delta){
 
 		// Apply fadeout
 		if(fadeout){
-			sf::Color color = p.sprite.getColor();
+			sf::Color color = p.shape.getFillColor();
 			color.a = p.lifetime / lifetime * 255;
-			p.sprite.setColor(color);
+			p.shape.setFillColor(color);
 		}
 		p.move(p.velocity * delta * speed);
 	}
@@ -45,10 +42,10 @@ void Particles2D::draw(sf::RenderTarget& target, sf::RenderStates states) const 
 }
 
 
-void Particles2D::reset_particle(std::size_t index){
-	particles[index].lifetime = std::fmod(((float)std::rand()), lifetime);
-	particles[index].setPosition(getPosition());
-	particles[index].sprite.setColor(color.to_sf_color());
+void Particles2D::reset_particle(Particle &p){
+	p.lifetime = std::fmod(((float)std::rand()), lifetime);
+	p.setPosition(getPosition());
+	p.shape.setFillColor(color.to_sf_color());
 
 	sf::Vector2f vel;
 	switch(shape){
@@ -71,7 +68,7 @@ void Particles2D::reset_particle(std::size_t index){
 		}
 	}
 
-	particles[index].velocity = vel;
+	p.velocity = vel;
 }
 
 // Amount
@@ -135,4 +132,23 @@ void Particles2D::set_fadeout(bool fadeout){
 
 bool Particles2D::get_fadeout(){
 	return fadeout;
+}
+
+// Texture
+void Particles2D::set_texture(sf::Texture & texture){
+	texture.setSmooth(true);
+	this->texture = texture;
+}
+
+sf::Texture & Particles2D::get_texture(){
+	return texture;
+}
+
+// Size
+void Particles2D::set_size(int size){
+	this->size = size;
+}
+
+int Particles2D::get_size(){
+	return size;
 }
