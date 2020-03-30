@@ -27,7 +27,7 @@ int main(){
 		Particles2D * particles = new Particles2D();
 
 		particles->set_amount(100);
-		// particles->set_color(Color::RED);
+		particles->set_color(Color::RED);
 		particles->set_shape(Particles2D::CIRCLE);
 		particles->setPosition(540, 360);
 		particles->set_gravity(2.5f);

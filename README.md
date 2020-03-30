@@ -38,7 +38,7 @@ Input automatically emits all events that have any functions in its stack.
 
 ## Future notes
 - Using emscripten for converting engine code to WebAsm
-
+- Particles preprocess
 
 ## Dev Notes
 
