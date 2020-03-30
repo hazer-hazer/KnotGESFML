@@ -1,21 +1,23 @@
 #include "scene/2d/Node2D.h"
-#include <iostream>
 
-Node2D::Node2D() : Node() {
+Node2D::Node2D(){}
+
+void Node2D::onready(){
+
 }
 
-void Node2D::setPosition(Point2 p){
-    this->position = p;
+void Node2D::onprocess(float delta){
+	
 }
 
-void Node2D::setPosition(sf::Vector2f p){
-    this->position = Point2(p.x, p.y);
-}
+// void Node2D::set_position(sf::Vector2f p){
+//     position = p;
+// }
 
-Point2 Node2D::getPosition(){
-    return position;
-}
+// sf::Vector2f Node2D::get_position(){
+//     return position;
+// }
 
-void Node2D::move(Point2 p){
-    position.move(p);
-}
+// void Node2D::move(sf::Vector2f p){
+//     position += p;
+// }

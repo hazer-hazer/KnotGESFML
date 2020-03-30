@@ -1,6 +1,8 @@
 #include "core/EventHandler.h"
 
-EventHandler::EventHandler(){}
+EventHandler::EventHandler(){
+	events.clear();
+}
 EventHandler::~EventHandler(){}
 
 void EventHandler::on(std::string name, EventMethod method){
@@ -10,9 +12,8 @@ void EventHandler::on(std::string name, EventMethod method){
 void EventHandler::emit(std::string name){
 	auto itr = events.find(name);
 	if(itr == events.end()){
-		throw print("Event " + name + " does not exist", false);
-	}
-	if(events[name].size() == 0){
+		// If there's no events yet then just return.
+		// Maybe it will be remade when I'll create MessageBus or whatevert
 		return;
 	}
 	for(auto ev : itr->second){
@@ -20,10 +21,10 @@ void EventHandler::emit(std::string name){
 	}
 }
 
-void EventHandler::clearEvents(std::string name){
+void EventHandler::clear_events(std::string name){
 	events[name].clear();
 }
 
-bool EventHandler::eventExists(std::string name){
+bool EventHandler::event_exists(std::string name){
 	return events.find(name) != events.end();
 }

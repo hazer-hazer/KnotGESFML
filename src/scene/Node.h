@@ -1,3 +1,7 @@
+/**
+ * Node is a part of scene tree.
+ */
+
 #ifndef NODE_H
 #define NODE_H
 
@@ -17,36 +21,73 @@ class Node;
 typedef std::vector <Node *> NodeChildren;
 typedef std::map <std::string, Node *> NodeChildrenMap;
 
+typedef std::function <void(void)> ReadyFunction;
+typedef std::function <void(float delta)> ProcessFunction;
+
 class Node : public Object {
+	
+	CLASS(Node, Object);
 
-    public:
+	public:
+		Node();
+		virtual ~Node() = default;
 
-        Node() : Object(){};
-        Node(std::string name) : Object(name){};
+	// TODO: Make onready and onprocess events with emmiting in game cycle
 
-        virtual ~Node() = default;
+	// Ready
+	public:
+		virtual void onready();
+		void set_ready(ReadyFunction &ready);
+		void ready();
 
-        void update();
+	private:
+		ReadyFunction _ready;
 
-        void _process(std::function <void(float delta)> process);
+	// Process
+	public:
+		virtual void onprocess(float delta);
+		void set_process(ProcessFunction &process);
+		void process();
 
-        // Children
-        void addChild(Node * child);
-        Node * findChild(std::string path);
-        Node * findChild();
-        NodeChildren getChildren();
-        NodeChildrenMap getChildrenMap();
-        Node * getParent();
-        void eachChild(std::function <void(Node *)> forEach);
+	private:
+		ProcessFunction _process;
+		sf::Clock process_timer;
 
-    protected:
-        sf::Clock processTimer;
+	// Children
+	public:
+		NodeChildren get_children();
 
-        std::function <void(float delta)> process;
+		void add_child(Node * child);
 
-        // Children
-        NodeChildren children;
-        Node * parent;
+		Node * find_child();
+		Node * find_child(std::string path);
+
+		NodeChildrenMap get_children_map();
+		void each_child(std::function <void(Node *)> forEach);
+
+	private:
+		NodeChildren children;
+
+
+	// Parent
+	public:
+		Node * get_parent();
+		void set_parent(Node * parent);
+
+	private:
+		Node * parent;
+	
+	// Name
+	public:
+		void set_name(std::string name);
+		void set_name();
+		std::string get_name();
+	
+	private:
+		std::string name;
+
+		bool has_child_with_name(std::string name);
+
 };
 
 #endif // NODE_H

@@ -1,11 +1,15 @@
 #include "scene/2d/Drawable2D.h"
 
-// void Drawable2D::drawTree(Canvas2D &canvas){
-// 	throughTree([&canvas](Node * n){
-// 		Drawable2D * drawable = dynamic_cast <Drawable2D *> (n);
-// 		if(drawable == nullptr){
-// 			return;
-// 		}
-// 		drawable->drawTree(canvas);
-// 	});
-// }
+Drawable2D::Drawable2D(){}
+
+void Drawable2D::onready(){
+
+}
+
+void Drawable2D::onprocess(float delta){
+
+}
+
+void Drawable2D::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+
+}

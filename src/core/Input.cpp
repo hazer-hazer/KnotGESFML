@@ -1,10 +1,34 @@
 #include "core/Input.h"
 
-Input::Input(sf::RenderWindow &win) : window(win){
+Input::Input(){}
+
+Input & Input::get(){
+	static Input instance;
+	return instance;
+}
+
+void Input::poll_events(){
+	while(Canvas2D::get()->pollEvent(event)){
+		switch(event.type){
+			case sf::Event::Closed:
+				Canvas2D::get()->close();
+				break;
+			case sf::Event::KeyPressed:
+				poll_key_pressed();
+				break;
+			case sf::Event::KeyReleased:
+				poll_key_released();
+				break;
+			case sf::Event::MouseMoved:
+				poll_mouse_move();
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 // Keyboard
-
 const char * Input::keyNames[] = {
 	"A", "B", "C", "D",
 	"E", "F", "G", "H",
@@ -34,57 +58,36 @@ const char * Input::keyNames[] = {
 	"F15"
 };
 
-void Input::pollEvents(){
-	while(window.pollEvent(event)){
-		switch(event.type){
-			case sf::Event::Closed:
-				window.close();
-				break;
-			case sf::Event::KeyPressed:
-				pollKeyPressed();
-				break;
-			case sf::Event::KeyReleased:
-				pollKeyReleased();
-				break;
-			case sf::Event::MouseMoved:
-				pollMouseMove();
-				break;
-			default:
-				break;
-		}
-	}
-}
-
-void Input::pollKeyPressed(){
+void Input::poll_key_pressed(){
 	int keyEq = (int) event.key.code;
-	std::string eventName = std::string("keyPressed") + keyNames[keyEq];
-	if(eventExists(eventName)){
+	std::string eventName = std::string("key_pressed") + keyNames[keyEq];
+	if(event_exists(eventName)){
 		emit(eventName);
 	}
 }
 
-void Input::pollKeyReleased(){
+void Input::poll_key_released(){
 	int keyEq = (int) event.key.code;
-	std::string eventName = std::string("keyReleased") + keyNames[keyEq];
-	if(eventExists(eventName)){
+	std::string eventName = std::string("key_released") + keyNames[keyEq];
+	if(event_exists(eventName)){
 		emit(eventName);
 	}
 }
 
 // Mouse
 
-void Input::pollMouseMove(){
-	if(eventExists("mouseMoved")){
-		emit("mouseMoved");
+void Input::poll_mouse_move(){
+	if(event_exists("mouse_moved")){
+		emit("mouse_moved");
 	}
 }
 
-Point2 Input::getMousePosition(bool relative){
-	sf::Vector2i pos;
-	if(relative){
-		pos = sf::Mouse::getPosition(window);
-	}else{
-		pos = sf::Mouse::getPosition();
-	}
-	return Point2(pos.x, pos.y);
+sf::Vector2f Input::get_mouse_position(bool relative){
+	// No non-relative now
+	return Canvas2D::get()->mapPixelToCoords(sf::Mouse::getPosition(*Canvas2D::get()));
+	// if(relative){
+	// 	return sf::Mouse::getPosition(canvas);
+	// }else{
+	// 	return sf::Mouse::getPosition();
+	// }
 }

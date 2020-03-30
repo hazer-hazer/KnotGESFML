@@ -1,34 +1,37 @@
 #include "Label.h"
 
-void Label::setString(std::string str){
-	text.setString(str);
+Label::Label(){}
+
+void Label::onready(){
+
 }
 
-void Label::setString(int num){
-	text.setString(std::to_string(num));
+void Label::onprocess(float delta){
+
 }
 
-void Label::setString(float num){
-	text.setString(std::to_string(num));
+void Label::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+	states.transform *= getTransform();
+
+	target.draw(label, states);
 }
 
-void Label::setFont(sf::Font &font){
-	text.setFont(font);
+void Label::set_text(std::string text){
+	label.setString(text);
 }
 
-void Label::setFontSize(unsigned int size){
-	text.setCharacterSize(size);
+void Label::set_font(sf::Font &font){
+	label.setFont(font);
 }
 
-void Label::setStyle(uint32_t s){
-	text.setStyle(s);
+void Label::set_font_size(unsigned int size){
+	label.setCharacterSize(size);
 }
 
-void Label::setColor(Color c){
-	text.setFillColor(c.toSfColor());
+void Label::set_style(uint32_t s){
+	label.setStyle(s);
 }
 
-void Label::draw(Canvas2D &canvas){
-	text.setPosition(position.x, position.y);
-	canvas.draw(text);
+void Label::set_color(const Color &c){
+	label.setFillColor(c.to_sf_color());
 }

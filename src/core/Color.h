@@ -23,11 +23,11 @@ struct Color{
 	static Color ORANGE;
 	static Color MAGENTA;
 
-	sf::Color toSfColor(){
+	const sf::Color to_sf_color() const {
 		return sf::Color(255 * r, 255 * g, 255 * b, 255 * a);
 	}
 
-	std::string toString(){
+	std::string to_string(){
 		return std::to_string(r) + " " + std::to_string(g) + " " + std::to_string(b);
 	}
 
@@ -36,6 +36,13 @@ struct Color{
 		g = 0;
 		b = 0;
 		a = 1.0;
+	}
+
+	Color(const Color &c){
+		this->r = c.r;
+		this->g = c.g;
+		this->b = c.b;
+		this->a = c.a;
 	}
 
 	Color(float r, float g, float b, float a = 1.0){
@@ -57,8 +64,26 @@ struct Color{
 		// Color name black, white and etc. from this static
 	}
 
-	Color operator + (Color c){
-		return Color(r + c.r / 2, g + c.g / 2, b + c.b);
+	Color operator + (const Color &c){
+		return Color((r + c.r) / 2, (g + c.g) / 2, (b + c.b) / 2);
+	}
+
+	Color operator - (const Color &c){
+		return Color((r - c.r) / 2, (g - c.g) / 2, (b - c.b) / 2);
+	}
+
+	Color & operator += (const Color &c){
+		this->r = (r + c.r) / 2;
+		this->g = (g + c.g) / 2;
+		this->b = (b + c.b) / 2;
+		return *this;
+	}
+
+	Color & operator -= (const Color &c){
+		this->r = (r - c.r) / 2;
+		this->g = (g - c.g) / 2;
+		this->b = (b - c.b) / 2;
+		return *this;
 	}
 };
 

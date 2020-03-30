@@ -3,35 +3,51 @@
 
 #define DEFAULT_FPS 60
 
-#include "core/math/Point2.h"
 #include "core/Color.h"
+#include "core/math/Vector2.h"
+#include "core/Object.h"
 #include <SFML/Graphics.hpp>
 
-#include <iostream>
+class Canvas2D : public sf::RenderWindow, public Object {
 
-using std::cout;
-using std::endl;
+	CLASS(Canvas2D, Object);
 
-class Canvas2D {
-    public:
-        Canvas2D(sf::VideoMode size, sf::String title, uint32_t style = sf::Style::Default);
-        ~Canvas2D(){};
+	private:
+		Canvas2D(sf::VideoMode size,
+				 const sf::String &title,
+				 uint32_t style = sf::Style::Default,
+				 const sf::ContextSettings &settings = sf::ContextSettings());
 
-        sf::RenderWindow & getWindow();
+		static Canvas2D * instance;
 
-        void clear();
-        void display();
-        bool isOpen();
+	// Delete
+	public:
+	    Canvas2D(const Canvas2D &) = delete;
+	    Canvas2D(Canvas2D &&) = delete;
+	    Canvas2D & operator = (const Canvas2D &) = delete;
+	    Canvas2D & operator = (Canvas2D &&) = delete;
 
-        void setClearColor(Color clearColor);
+	// Singleton
+	public:
+		static Canvas2D * create(sf::VideoMode size,
+						  const sf::String &title,
+						  uint32_t style = sf::Style::Default,
+						  const sf::ContextSettings &settings = sf::ContextSettings());
+		static Canvas2D * get();
 
-        void draw(const sf::Drawable & drawable);
-        void drawPolygon(std::vector <Point2> points, Color color = Color::BLACK);
+		int test;
 
-    protected:
-        sf::RenderWindow window;
-        
-        Color clearColor;
+		int check(){
+			return test;
+		}
+
+	// Clear
+	private:
+		Color clear_color;
+
+	public:
+		void clear();
+		void set_clear_color(const Color &color = Color::BLACK);
 };
 
 #endif

@@ -6,15 +6,18 @@
 
 #include <SFML/Graphics.hpp>
 
-class Drawable2D : public Node2D {
-    public:
-        Drawable2D(){};
+class Drawable2D : public Node2D, public sf::Drawable {
 
-        virtual ~Drawable2D() = default;
+	CLASS(Drawable2D, Node2D);
 
-        // void drawTree(Canvas2D &canvas);
-        
-        virtual void draw(Canvas2D &canvas) = 0;
+	public:
+		Drawable2D();
+		virtual ~Drawable2D() = default;
+
+		virtual void onready();
+		virtual void onprocess(float delta);
+		
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif

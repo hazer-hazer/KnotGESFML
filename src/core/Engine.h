@@ -6,44 +6,44 @@
 #include "core/Input.h"
 #include "canvas/Canvas2D.h"
 #include "scene/2d/Drawable2D.h"
+#include "scene/Scene.h"
 
 #include <functional>
 
 class Engine : public Object {
+
+	CLASS(Engine, Object);
+
 	public:
 		Engine();
 		virtual ~Engine() = default;
 
-		void addScene(Node * scene);
-		Node * getCurrentScene();
-		Node * getScene(unsigned int position);
+	// Scenes
+	private:
+		std::size_t current_scene = 0;
+		std::vector <Scene> scenes;
 
-		std::function <void(Input & input, Node * scene)> gameLogic;
+	public:
+		void add_scene(Scene &scene);
+		Scene & get_scene(std::size_t position);
 
-		// Go through tree starting at given root
-		// and calling given function with casted Node.
-		// This is a universal way to do each cycle step
-		template <typename T>
-		void throughTree(Node * root, std::function<void(T*)> each);
+		void set_current_scene(std::size_t position);
+		Scene & get_current_scene();
 
-		Input & getInput();
+	// Input
+	private:
+		Input &input;
 
-		void launch();
-
-		float getFps();
+	public:
+		Input & get_input();
 
 	private:
-		static bool isRunning;
-
-		sf::Clock loopTimer;
+		sf::Clock loop_timer;
 		float fps;
 
-		unsigned int currentScene = 0;
-		std::vector <Node *> scenes;
-
-		Canvas2D canvas;
-		Input input;
-
+	public:
+		void launch();
+		float get_fps();
 };
 
 #endif

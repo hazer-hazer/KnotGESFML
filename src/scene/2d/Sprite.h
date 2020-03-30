@@ -5,20 +5,24 @@
 #include "core/ResourceHolder.h"
 
 class Sprite : public Drawable2D {
+
+	CLASS(Sprite, Drawable2D);
+
 	public:
 		// Constructor with path to texture file
-		Sprite(std::string path);
-
-		// Constructor with existent texture as parameter
-		Sprite(sf::Texture * texture);
-
-		// Constructor with texture loaded with ResourceHolder
-		Sprite(sf::Texture & texture);
-
+		Sprite();
         virtual ~Sprite() = default;
 
-		void draw(Canvas2D &canvas);
-		void setTexture(sf::Texture * texture);
+        virtual void onready();
+        virtual void onprocess(float delta);
+        
+        virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
+		void set_texture(sf::Texture * texture);
+
+		const Vector2 get_size(){
+			return Vector2(sprite.getTexture()->getSize());
+		};
 
 	private:
 		sf::Sprite sprite;

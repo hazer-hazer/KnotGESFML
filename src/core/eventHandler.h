@@ -6,21 +6,19 @@
 #include <vector>
 #include <functional>
 
-#include "core/Object.h"
-
 typedef std::function<void()> EventMethod;
 
 typedef std::map <std::string, std::vector <EventMethod>> EventStack;
 
-class EventHandler : public Object {
+class EventHandler {
 	public:
 		EventHandler();
 		virtual ~EventHandler();
 
 		void on(std::string name, EventMethod method);
 		void emit(std::string name);
-		void clearEvents(std::string name);
-		bool eventExists(std::string name);
+		void clear_events(std::string name);
+		bool event_exists(std::string name);
 
 	private:
 		EventStack events;

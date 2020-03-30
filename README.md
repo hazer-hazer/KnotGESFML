@@ -14,6 +14,15 @@ For example:
 > > > Sprite
 > > > CollisionShape2D
 
+### Object
+Object is main class that should be inherited by every game-cycle.
+Vector2 and another helpers do not need to be inherited.
+
+Object inherits EventHandler, because every game-cycle object can have events.
+
+
+### Node
+Node is the main class as a part of scene tree.
 
 ### Input
 Input is a usefull class that works with all events like mouse events, keyboard event and etc.
@@ -42,6 +51,9 @@ Input automatically emits all events that have any functions in its stack.
 * Audio
 * Rendering
 
+## Ideas
+- Add CommandLine Node or whatever for ease creating IO in game with text
+
 ## Helpful links
 
 Engine structure:
@@ -49,3 +61,4 @@ Engine structure:
 
 Particle system:
 - https://github.com/SFML/SFML/wiki/Source:-Particle-System-for-SFML-2
+

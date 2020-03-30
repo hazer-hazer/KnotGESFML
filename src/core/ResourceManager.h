@@ -8,15 +8,13 @@
 /**
  * Change to storing special Resource class as template typename
  * to make possible using images, fonts and etc. with different extension
-*/
+ */
 
 template <typename Resource>
 class ResourceManager : public Object {
 	public:
 		ResourceManager(const std::string & dir, const std::string & ext)
-		: directory(dir), extension("." + ext){
-			setName("ResourceManager");
-		};
+		: directory(dir), extension("." + ext){};
 
 		Resource & load(const std::string & name){
 			if(!exists(name)){
@@ -26,26 +24,26 @@ class ResourceManager : public Object {
 			return resources.at(name);
 		}
 
+
 		bool exists(const std::string & name) const {
 			return resources.find(name) != resources.end();
 		}
 
 		void add(const std::string & name){
 			Resource res;
-			std::string path = getFullPath(name);
+			std::string path = get_full_path(name);
 			if(!res.loadFromFile(path)) {
-				throw print("Failed to load file by path " + path, false);
+				throw std::string("Failed to load file by path ") + path;
 				// Resource fail;
 				// fail.loadFromFile(m_folder + "_fail_" + m_extention);
 				// m_resources.insert(std::make_pair(name, fail));
 			}else {
-				print(path + " loaded");
 				resources.insert(std::make_pair(name, res));
 			}
 		}
 
 	private:
-		std::string getFullPath(const std::string & name){
+		std::string get_full_path(const std::string & name){
 			return directory + "/" + name + extension;
 		}
 
