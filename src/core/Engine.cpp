@@ -8,7 +8,6 @@ Engine::Engine() : input(Input::get()){
 // Scenes
 void Engine::add_scene(Scene &scene){
 	scenes.push_back(scene);
-	set_current_scene(scenes.size() - 1);
 	
 	scene.through_tree<Node>([](Node * node){
 		node->onready();
@@ -24,6 +23,9 @@ Scene & Engine::get_scene(std::size_t position){
 }
 
 Scene & Engine::get_current_scene(){
+	if(scenes.size() == 0){
+		throw "No scenes found";
+	}
 	return get_scene(current_scene);
 }
 

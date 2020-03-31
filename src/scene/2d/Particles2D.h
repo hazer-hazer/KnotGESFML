@@ -27,84 +27,6 @@ class Particles2D : public Drawable2D {
 
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-	// Amount
-	public:
-		void set_amount(std::size_t amount);
-		std::size_t get_amount();
-
-	private:
-		std::size_t amount = 10;
-
-	// Lifetime
-	public:
-		void set_lifetime(float lifetime);
-		float get_lifetime();
-
-	private:
-		float lifetime = 5.0f;
-
-	// Gravity
-	public:
-		void set_gravity(float gravity);
-		float get_gravity();
-
-	private:
-		float gravity = 10.0f;
-
-	// Speed
-	public:
-		void set_speed(float speed);
-		float get_speed();
-
-	private:
-		float speed = 50.0f;
-
-	// Shape
-	public:
-		enum Shape{
-			SQUARE,
-			CIRCLE,
-			POINT
-		};
-		void set_shape(Shape shape);
-		Particles2D::Shape get_shape();
-
-	private:
-		Shape shape = POINT;
-
-	// Color
-	public:
-		void set_color(Color color);
-		Color get_color();
-
-	private:
-		Color color = Color::WHITE;
-
-	// Fadeout
-	public:
-		void set_fadeout(bool fadeout);
-		bool get_fadeout();
-
-	private:
-		bool fadeout = true;
-
-	// Texture
-	public:
-		void set_texture(sf::Texture & texture);
-		sf::Texture & get_texture();
-
-	private:
-		sf::Texture texture;
-
-	// Size
-	public:
-		void set_size(int size);
-		int get_size();
-
-	private:
-		int size;
-
-	// Particles
 	private:
 		struct Particle : public sf::Drawable, public sf::Transformable {
 			float lifetime;
@@ -120,6 +42,48 @@ class Particles2D : public Drawable2D {
 		std::vector <Particle> particles;
 
 		void reset_particle(Particle &p);
+
+	// Amount
+	GETSETD(std::size_t, amount, 10);
+
+	// Lifetime
+	GETSETD(float, lifetime, 5.0f);
+
+	// Gravity
+	GETSETD(float, gravity, 10.0f);
+
+	// Speed
+	GETSETD(float, speed, 50.0f);
+
+	// Color
+	GETSETD(Color, color, Color::WHITE);
+
+	// Fadeout
+	GETSETD(bool, fadeout, true);
+		
+	// Shape
+	public:
+		enum Shape{
+			SQUARE,
+			CIRCLE,
+			POINT
+		};
+		void set_shape(Shape shape);
+		Particles2D::Shape get_shape();
+
+	private:
+		Shape shape = POINT;
+
+	// Texture
+	public:
+		void set_texture(sf::Texture & texture);
+		sf::Texture & get_texture();
+
+	private:
+		sf::Texture texture;
+
+	// Size
+	GETSETD(int, size, 5);
 };
 
 #endif

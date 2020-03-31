@@ -4,6 +4,9 @@
 #include "scene/Node.h"
 
 class Scene : public Object {
+
+	CLASS(Scene, Object);
+
 	public:
 		Scene();
 		virtual ~Scene() = default;

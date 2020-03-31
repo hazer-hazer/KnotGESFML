@@ -3,7 +3,11 @@
 Object::Object(){
 }
 
-void Object::error(std::string message){
+void Object::error(std::string message, bool thr){
 	message = "\e[0;31m" + message;
-	print(message, true);
+	if(thr){
+		throw print(message, false);
+	}else{
+		print(message);
+	}
 }

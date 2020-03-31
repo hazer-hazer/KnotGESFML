@@ -28,15 +28,28 @@ class Object : public EventHandler {
 			return message; \
 		}
 
+	#define GETSET(type, varname) \
+	public: \
+		void set_##varname(type __value){ varname = __value; }; \
+		type get_##varname() const { return varname; } \
+	private: \
+		type varname;
+
+	#define GETSETD(type, varname, default_val) \
+	public: \
+		void set_##varname(type __value){ varname = __value; }; \
+		type get_##varname() const { return varname; } \
+	private: \
+		type varname = default_val;
+
 	CLASS(Object, None);
 
 	public:
 		Object();
 		virtual ~Object() = default;
 
-		void error(std::string message);
+		void error(std::string message, bool thr = true);
 
-	private:
 };
 
 #endif
