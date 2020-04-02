@@ -1,5 +1,5 @@
 # !!!
-## THIS PROJECT WAS MOVED TO 
+## THIS PROJECT WAS MOVED TO github.com/hazer-hazer/knotge
 
 # KnotGE
 Knot Game Engine
